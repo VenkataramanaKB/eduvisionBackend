@@ -9,7 +9,7 @@ require('./config/passport'); // Load Passport configuration
 const projectRoutes = require('./routes/projects');
 const communityRoutes = require('./routes/community');
 const dashboardRoutes = require('./routes/dashboard');
-const authRoutes = require('./routes/auth'); // Authentication routes
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
