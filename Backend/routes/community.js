@@ -1,9 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const Community = require('../models/Community.js');
-const Project = require('../models/Project.js');
+const Community = require('../models/Community');
+const Project = require('../models/Project');
 
-router.post('/create-community', async (req, res) => {
+
+const isAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    return res.status(401).json({ error: 'Unauthorized access' });
+};
+
+
+router.post('/create-community', isAuthenticated, async (req, res) => {
     try {
         const { name, description } = req.body;
         if (!name) {
@@ -17,10 +26,11 @@ router.post('/create-community', async (req, res) => {
     }
 });
 
-router.post('/add', async (req, res) => {
+
+router.post('/add', isAuthenticated, async (req, res) => {
     try {
         const { communityId, projectId } = req.body;
-        
+
         if (!communityId || !projectId) {
             return res.status(400).json({ error: 'Community ID and Project ID are required' });
         }
