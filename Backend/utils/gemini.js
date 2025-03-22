@@ -5,7 +5,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const generateProjects = async (prompt) => {
     try {
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
         const systemPrompt = `Generate 5 programming projects based on the following prompt: "${prompt}".
         For each project, provide:
@@ -40,9 +40,7 @@ const generateProjects = async (prompt) => {
         try {
             return JSON.parse(text);
         } catch (parseError) {
-            console.error('JSON Parse Error:', parseError);
-            console.error('Raw text that failed to parse:', text);
-            throw new Error('Failed to parse Gemini response as JSON');
+            throw new Error('Failed');
         }
     } catch (error) {
         

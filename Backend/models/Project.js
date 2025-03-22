@@ -22,6 +22,7 @@ const projectSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     upvotes: { type: Number, default: 0 }   
 });
 
